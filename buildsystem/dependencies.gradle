@@ -1,0 +1,136 @@
+allprojects {
+    repositories {
+        jcenter()
+        maven { url "https://maven.google.com" }
+        mavenCentral()
+    }
+}
+
+ext {
+//    Android
+    androidBuildToolsVersion = "28.0.1"
+    androidMinSdkVersion = 16
+    androidTargetSdkVersion = 28
+    androidCompileSdkVersion = 28
+    multiDexVersion = '1.0.1'
+
+    //Libraries
+    androidSupportLibraryVersion = '26.1.0'
+    daggerVersion = '2.7'
+    expandableRVVersion = '3.0.0-RC1'
+    flexibleDividerVersion = '1.4.0'
+    advancedRVVersion = '0.10.2'
+    butterknifeVersion = '8.4.0'
+    gsonVersion = '2.8.0'
+
+    //Rx
+    rxAndroidVersion = '1.2.1'
+    rxJavaVersion = '1.1.6'
+    rxBindingVersion = '1.0.0'
+    rxLintVersion = '1.0'
+    rxJavaProguardRulesVersion = '1.1.6.0'
+    rxPreferencesVersion = '1.0.2'
+
+    //Network
+    retrofitRxAdapterVersion = '2.1.0'
+    okhttpVersion = '3.9.0'
+
+    //Testing
+    jUnitVersion = '4.12'
+    mockitoVersion = '2.1.0'
+
+    constraintLayoutVersion = '1.0.2'
+
+    def androidLibs = [
+            appCompat          : [group: 'com.android.support', name: 'appcompat-v7', version: androidSupportLibraryVersion],
+            cardView           : [group: 'com.android.support', name: 'cardview-v7', version: androidSupportLibraryVersion],
+            design             : [group: 'com.android.support', name: 'design', version: androidSupportLibraryVersion],
+            constraintLayout   : [group: 'com.android.support.constraint', name: 'constraint-layout', version: constraintLayoutVersion],
+            multidex           : [group: 'com.android.support', name: 'multidex', version: multiDexVersion]
+     ]
+
+    def libs = [
+            retrofitRxAdapter  : [group: 'com.squareup.retrofit2', name: 'adapter-rxjava', version: retrofitRxAdapterVersion],
+            retrofitGSonConver : [group: 'com.squareup.retrofit2', name: 'converter-gson', version: retrofitRxAdapterVersion],
+            okhttp             : [group: 'com.squareup.okhttp3', name: 'okhttp', version: okhttpVersion],
+            okhttpInterceptor  : [group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: okhttpVersion],
+            dagger             : [group: 'com.google.dagger', name: 'dagger', version: daggerVersion],
+            daggerCompiler     : [group: 'com.google.dagger', name: 'dagger-compiler', version: daggerVersion],
+            expandableRV       : [group: 'com.bignerdranch.android', name: 'expandablerecyclerview', version: expandableRVVersion],
+            flexibleDivider    : [group: 'com.yqritc', name: 'recyclerview-flexibledivider', version: flexibleDividerVersion],
+            advancedRV         : [group: 'com.h6ah4i.android.widget.advrecyclerview', name: 'advrecyclerview', version: advancedRVVersion],
+            butterknife        : [group: 'com.jakewharton', name: 'butterknife', version: butterknifeVersion],
+            butterknifeCompiler: [group: 'com.jakewharton', name: 'butterknife-compiler', version: butterknifeVersion],
+            gson               : [group: 'com.google.code.gson', name: 'gson', version: gsonVersion],
+            rxAndroid          : [group: 'io.reactivex', name: 'rxandroid', version: rxAndroidVersion],
+            rxJava             : [group: 'io.reactivex', name: 'rxjava', version: rxJavaVersion],
+            rxBinding          : [group: 'com.jakewharton.rxbinding', name: 'rxbinding', version: rxBindingVersion],
+            rxBindingAppCompat : [group: 'com.jakewharton.rxbinding', name: 'rxbinding-appcompat-v7', version: rxBindingVersion],
+            rxBindingDesign    : [group: 'com.jakewharton.rxbinding', name: 'rxbinding-design', version: rxBindingVersion],
+            rxLint             : [group: 'nl.littlerobots.rxlint', name: 'rxlint', version: rxLintVersion],
+            rxProguard         : [group: 'com.artemzin.rxjava', name: 'proguard-rules', version: rxJavaProguardRulesVersion],
+            rxPreferences      : [group: 'com.f2prateek.rx.preferences', name: 'rx-preferences', version: rxPreferencesVersion]
+    ]
+
+    def testLibs = [
+            junit              : [group: 'junit', name: 'junit', version: jUnitVersion],
+            mockito            : [group: 'org.mockito', name: 'mockito-core', version: mockitoVersion]
+    ]
+
+    appDependencies = [
+            [configuration: "implementation", dependency: androidLibs.appCompat],
+            [configuration: "implementation", dependency: androidLibs.cardView],
+            [configuration: "implementation", dependency: androidLibs.design],
+            [configuration: "implementation", dependency: androidLibs.multidex],
+            [configuration: "implementation", dependency: androidLibs.constraintLayout],
+            [configuration: "testImplementation", dependency: testLibs.junit],
+            [configuration: "testImplementation", dependency: testLibs.mockito],
+            [configuration: "implementation", dependency: libs.dagger],
+            [configuration: "annotationProcessor", dependency: libs.daggerCompiler],
+            [configuration: "implementation", dependency: libs.expandableRV],
+            [configuration: "implementation", dependency: libs.flexibleDivider],
+            [configuration: "implementation", dependency: libs.advancedRV],
+            [configuration: "implementation", dependency: libs.butterknife],
+            [configuration: "annotationProcessor", dependency: libs.butterknifeCompiler],
+            [configuration: "implementation", dependency: libs.rxAndroid],
+            [configuration: "implementation", dependency: libs.rxJava],
+            [configuration: "implementation", dependency: libs.rxBinding],
+            [configuration: "implementation", dependency: libs.rxBindingAppCompat],
+            [configuration: "implementation", dependency: libs.rxBindingDesign],
+            [configuration: "implementation", dependency: libs.rxLint],
+            [configuration: "implementation", dependency: libs.rxProguard]
+
+    ]
+
+    domainDependencies = [
+            [configuration: "implementation", dependency: androidLibs.appCompat],
+            [configuration: "testImplementation", dependency: testLibs.junit],
+            [configuration: "testImplementation", dependency: testLibs.mockito],
+            [configuration: "implementation", dependency: libs.dagger],
+            [configuration: "annotationProcessor", dependency: libs.daggerCompiler],
+            [configuration: "implementation", dependency: libs.gson],
+            [configuration: "implementation", dependency: libs.rxAndroid],
+            [configuration: "implementation", dependency: libs.rxJava],
+            [configuration: "implementation", dependency: libs.rxLint],
+            [configuration: "implementation", dependency: libs.rxProguard]
+
+    ]
+
+    dataDependencies = [
+            [configuration: "testImplementation", dependency: testLibs.junit],
+            [configuration: "testImplementation", dependency: testLibs.mockito],
+            [configuration: "implementation", dependency: libs.rxAndroid],
+            [configuration: "implementation", dependency: libs.rxJava],
+            [configuration: "implementation", dependency: libs.rxLint],
+            [configuration: "implementation", dependency: libs.dagger],
+            [configuration: "annotationProcessor", dependency: libs.daggerCompiler],
+            [configuration: "implementation", dependency: libs.rxProguard],
+            [configuration: "implementation", dependency: libs.rxPreferences],
+            [configuration: "implementation", dependency: libs.retrofitRxAdapter],
+            [configuration: "implementation", dependency: libs.retrofitGSonConver],
+            [configuration: "implementation", dependency: libs.okhttp],
+            [configuration: "implementation", dependency: libs.okhttpInterceptor],
+            [configuration: "implementation", dependency: libs.gson]
+    ]
+
+}

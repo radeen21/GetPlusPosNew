@@ -1,0 +1,46 @@
+apply plugin: 'com.android.application'
+
+android {
+    def globalConfig = rootProject.extensions.getByName("ext")
+    def applicationVersionName = globalConfig.getAt("applicationVersionName")
+    def applicationVersionCode = globalConfig.getAt("applicationVersionCode")
+
+    compileSdkVersion globalConfig.getAt("androidCompileSdkVersion")
+    buildToolsVersion '28.0.1'
+
+    defaultConfig {
+        applicationId globalConfig.getAt("applicationId")
+        versionCode applicationVersionCode
+        versionName applicationVersionName
+        minSdkVersion globalConfig.getAt("androidMinSdkVersion")
+        targetSdkVersion globalConfig.getAt("androidTargetSdkVersion")
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath false
+            }
+        }
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    rootProject.appDependencies.each {
+        add(it.configuration, it.dependency, it.options)
+    }
+
+    implementation project(path: ':data')
+    implementation project(path: ':domain')
+
+}
