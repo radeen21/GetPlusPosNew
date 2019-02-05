@@ -22,6 +22,10 @@ ext {
     advancedRVVersion = '0.10.2'
     butterknifeVersion = '8.4.0'
     gsonVersion = '2.8.0'
+    zxingVersion = '1.9'
+    zxingEmbeddedVersion = '3.6.0'
+    zbarVersion = "1.0.0"
+
 
     //Rx
     rxAndroidVersion = '1.2.1'
@@ -69,7 +73,10 @@ ext {
             rxBindingDesign    : [group: 'com.jakewharton.rxbinding', name: 'rxbinding-design', version: rxBindingVersion],
             rxLint             : [group: 'nl.littlerobots.rxlint', name: 'rxlint', version: rxLintVersion],
             rxProguard         : [group: 'com.artemzin.rxjava', name: 'proguard-rules', version: rxJavaProguardRulesVersion],
-            rxPreferences      : [group: 'com.f2prateek.rx.preferences', name: 'rx-preferences', version: rxPreferencesVersion]
+            rxPreferences      : [group: 'com.f2prateek.rx.preferences', name: 'rx-preferences', version: rxPreferencesVersion],
+            zxingCore          : [group: 'me.dm7.barcodescanner', name: 'zxing', version: zxingVersion],
+            zxingEmbedded      : [group: 'com.journeyapps', name: 'zxing-android-embedded', version: zxingEmbeddedVersion],
+            zbar               : [group: 'com.yanzhenjie.zbar', name: 'zbar', version: zbarVersion]
     ]
 
     def testLibs = [
@@ -98,7 +105,10 @@ ext {
             [configuration: "implementation", dependency: libs.rxBindingAppCompat],
             [configuration: "implementation", dependency: libs.rxBindingDesign],
             [configuration: "implementation", dependency: libs.rxLint],
-            [configuration: "implementation", dependency: libs.rxProguard]
+            [configuration: "implementation", dependency: libs.rxProguard],
+            [configuration: "implementation", dependency: libs.zxingCore],
+            [configuration: "implementation", dependency: libs.zxingEmbedded],
+            [configuration: "implementation", dependency: libs.zbar]
 
     ]
 

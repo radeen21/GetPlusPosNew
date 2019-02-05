@@ -1,5 +1,6 @@
 package com.example.babartrihapsoro.getpluspos.view.main;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import com.example.babartrihapsoro.getpluspos.R;
 import com.example.babartrihapsoro.getpluspos.base.BaseActivity;
 import com.example.babartrihapsoro.getpluspos.helper.ItemOffsetDecoration;
 import com.example.babartrihapsoro.getpluspos.view.adapter.MainAdapter;
+import com.example.babartrihapsoro.getpluspos.view.main.cekpoint.CekPointActivity;
+import com.example.babartrihapsoro.getpluspos.view.main.cekpoint.popupcekpoint.PopUpCekPoint;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,6 +26,7 @@ public class MainActivity extends BaseActivity implements MainAdapter.ItemClickL
     RecyclerView recMain;
 
     private GridLayoutManager gridLayoutManager;
+    private Context context;
 
     private String titleMain[] = {
         "Cek Jumlah Point", "Tukar Point", "Beri Poin",
@@ -41,6 +45,7 @@ public class MainActivity extends BaseActivity implements MainAdapter.ItemClickL
 
     @Override
     public void setup() {
+        context = this.context;
         initMain();
     }
 
@@ -56,16 +61,13 @@ public class MainActivity extends BaseActivity implements MainAdapter.ItemClickL
 
     @Override
     public void onItemClick(View view, int position) {
-        final Intent intent;
+        Intent intent = new Intent();
         switch (position){
             case 0:
-//                intent =  new Intent(this, FirstActivity.class);
-                Toast.makeText(this, "click oii 0", Toast.LENGTH_SHORT).show();
+                intent =  new Intent(this, CekPointActivity.class);
                 break;
-
             case 1:
-                Toast.makeText(this, "click oii 1", Toast.LENGTH_SHORT).show();
-//                intent =  new Intent(this, SecondActivity.class);
+                intent =  new Intent(this, PopUpCekPoint.class);
                 break;
             case 2:
                 Toast.makeText(this, "click oii 2", Toast.LENGTH_SHORT).show();
@@ -81,6 +83,6 @@ public class MainActivity extends BaseActivity implements MainAdapter.ItemClickL
                 break;
 
         }
-//        this.startActivity(intent);
+        this.startActivity(intent);
     }
 }
